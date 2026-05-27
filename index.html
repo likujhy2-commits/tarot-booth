@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>광주청년 일경험드림 ✨ 미래 직장운 타로</title>
+<style>
+  :root {
+    --bg-1: #2a1454;
+    --bg-2: #5e2a8a;
+    --bg-3: #b25fc4;
+    --accent: #ffd86b;
+    --pink: #ffb6e6;
+    --soft: #f7e9ff;
+    --card-back-1: #6e3fb6;
+    --card-back-2: #ffb6e6;
+    --gold: #ffd86b;
+    --silver: #e8e8f0;
+    --bronze: #ffb088;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: radial-gradient(ellipse at top, var(--bg-3) 0%, var(--bg-2) 35%, var(--bg-1) 100%);
+    color: var(--soft);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+  /* 반짝이 별 배경 */
+  .stars, .stars2 {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .stars { background-image:
+      radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+      radial-gradient(1px 1px at 70% 80%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 40% 60%, #ffd86b, transparent),
+      radial-gradient(1px 1px at 90% 20%, #fff, transparent),
+      radial-gradient(2px 2px at 10% 80%, #ffb6e6, transparent),
+      radial-gradient(1px 1px at 55% 15%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 85% 50%, #fff, transparent);
+    animation: twinkle 4s infinite alternate;
+  }
+  .stars2 { background-image:
+      radial-gradient(1px 1px at 15% 70%, #fff, transparent),
+      radial-gradient(1px 1px at 75% 35%, #ffd86b, transparent),
+      radial-gradient(2px 2px at 50% 90%, #fff, transparent),
+      radial-gradient(1px 1px at 30% 45%, #ffb6e6, transparent);
+    animation: twinkle 5.5s infinite alternate-reverse;
+  }
+  @keyframes twinkle { from { opacity: 0.6; } to { opacity: 1; } }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 20px 80px;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(6px);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: clamp(26px, 4.5vw, 42px);
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #fff, var(--accent), var(--pink), #fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: #e8d8ff;
+    opacity: 0.9;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .subtitle b { color: var(--accent); }
+  .step-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #ff9ad6);
+    color: #4a1f6e;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  /* ============ 화면 전환 ============ */
+  .screen { display: none; animation: fade 0.5s ease; }
+  .screen.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+
+  /* ============ 입력 화면 ============ */
+  .input-card {
+    max-width: 440px;
+    margin: 30px auto 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,216,107,0.08));
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 22px;
+    padding: 32px 28px;
+    backdrop-filter: blur(8px);
+  }
+  .input-group { margin-bottom: 18px; text-align: left; }
+  .input-group label {
+    display: block;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.25);
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .input-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(0,0,0,0.35);
+  }
+  .input-group input::placeholder { color: rgba(255,255,255,0.35); }
+  .birthday-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 8px;
+  }
+  .birthday-row input { text-align: center; }
+  .input-error {
+    color: #ffb6b6;
+    font-size: 12px;
+    margin-top: 6px;
+    min-height: 16px;
+  }
+
+  /* 성별 선택 */
+  .gender-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .gender-btn {
+    padding: 12px 8px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.25);
+    color: #e8d8ff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .gender-btn:hover {
+    border-color: rgba(255,216,107,0.5);
+    background: rgba(0,0,0,0.35);
+    transform: none;
+  }
+  .gender-btn.selected {
+    background: linear-gradient(135deg, rgba(255,216,107,0.3), rgba(255,182,230,0.25));
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 0 1px var(--accent) inset, 0 4px 14px rgba(255,216,107,0.25);
+  }
+  .gender-btn .em { display:block; font-size: 20px; margin-bottom: 2px; line-height: 1; }
+
+  /* 개인 정보 태그 (운세 결과 화면 상단) */
+  .user-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,216,107,0.3);
+    padding: 8px 18px;
+    border-radius: 999px;
+    margin: 0 auto 8px;
+    font-size: 13px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .user-tag .name { color: #fff; font-weight: 700; }
+  .user-tag .divider { color: rgba(255,255,255,0.3); }
+  .user-tag .meta { color: var(--accent); font-size: 12px; }
+  .user-tag .meta b { color: #fff; font-weight: 700; }
+
+  /* ============ 카드 그리드 ============ */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin: 20px 0 30px;
+  }
+  @media (max-width: 720px) {
+    .cards { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  }
+  .card-wrap {
+    perspective: 1200px;
+    cursor: pointer;
+    transition: transform 0.25s;
+  }
+  .card-wrap:hover { transform: translateY(-8px); }
+  .card-wrap.disabled { pointer-events: none; opacity: 0.25; transform: scale(0.9); }
+  .card-label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+    border-radius: 16px;
+  }
+  .card.flipped { transform: rotateY(180deg); }
+  .card-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1) inset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 14px;
+    overflow: hidden;
+  }
+  .card-back {
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 40%),
+      linear-gradient(135deg, var(--card-back-1), var(--card-back-2));
+    color: #fff;
+  }
+  .card-back::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1.5px solid rgba(255,255,255,0.55);
+    border-radius: 12px;
+    pointer-events: none;
+  }
+  .card-back .symbol {
+    font-size: 44px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+    animation: floaty 3s ease-in-out infinite;
+  }
+  .card-back .back-text {
+    margin-top: 8px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    opacity: 0.85;
+  }
+  @keyframes floaty { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-6px); } }
+
+  /* ============ 진짜 타로 카드 스타일 ============ */
+  .card-front {
+    transform: rotateY(180deg);
+    background:
+      radial-gradient(ellipse at center, #fff8e3 0%, #f5e6c4 60%, #e8d29a 100%);
+    color: #3a1f0f;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Cormorant Garamond', 'Times New Roman', 'Nanum Myeongjo', serif;
+  }
+  /* 외곽 금테 + 안쪽 라인 */
+  .card-front::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 2px solid #8b6914;
+    border-radius: 10px;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px #d4a017, inset 0 0 18px rgba(139, 105, 20, 0.25);
+  }
+  .card-front::after {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(139, 105, 20, 0.45);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+  .tarot-inner {
+    position: absolute;
+    inset: 22px 18px 22px 18px;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto auto auto;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+  /* 상하단 로마 숫자 */
+  .tarot-roman {
+    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #6b4a14;
+    letter-spacing: 4px;
+    line-height: 1;
+  }
+  /* 장식 분할선 */
+  .tarot-divider {
+    width: 70%;
+    height: 1px;
+    margin: 0 auto;
+    background: linear-gradient(to right, transparent, #8b6914, transparent);
+    position: relative;
+  }
+  .tarot-divider::before {
+    content: "✦";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #8b6914;
+    font-size: 10px;
+    background: #f5e6c4;
+    padding: 0 4px;
+  }
+  /* 중앙 일러스트 영역 (큰 이모지) */
+  .tarot-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 0;
+  }
+  .tarot-art-bg {
+    position: absolute;
+    width: 70%;
+    aspect-ratio: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(212, 160, 23, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .tarot-art-icon {
+    font-size: 56px;
+    filter: drop-shadow(0 2px 4px rgba(139, 105, 20, 0.4)) sepia(0.15);
+    position: relative;
+    z-index: 1;
+    line-height: 1;
+  }
+  /* 4모서리 장식 — 카드 외곽 라인 위에 살짝 */
+  .tarot-corner {
+    position: absolute;
+    color: #8b6914;
+    font-size: 11px;
+    z-index: 3;
+    background: #f5e6c4;
+    width: 16px; height: 16px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+  }
+  .tarot-corner.tl { top: 8px; left: 8px; }
+  .tarot-corner.tr { top: 8px; right: 8px; }
+  .tarot-corner.bl { bottom: 8px; left: 8px; }
+  .tarot-corner.br { bottom: 8px; right: 8px; }
+  /* 카드 이름 (제목) */
+  .tarot-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    padding: 0 4px;
+    max-width: 100%;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .tarot-title .title-ko {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: #3a1f0f;
+    letter-spacing: 1.5px;
+    line-height: 1.25;
+  }
+  .tarot-title .title-en {
+    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #8b6914;
+    letter-spacing: 2.5px;
+    font-style: italic;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  .tarot-subtitle {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6b4a14;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-top: 4px;
+  }
+
+  /* 큰 카드 (운세 결과 화면) */
+  .big-card {
+    max-width: 300px;
+    margin: 14px auto 16px;
+  }
+  .big-card .tarot-art-icon { font-size: 80px; }
+  .big-card .tarot-title { gap: 6px; }
+  .big-card .tarot-title .title-ko { font-size: 18px; letter-spacing: 2px; }
+  .big-card .tarot-title .title-en { font-size: 11px; letter-spacing: 3px; }
+  .big-card .tarot-subtitle { font-size: 13px; letter-spacing: 3px; margin-top: 6px; }
+  .big-card .tarot-roman { font-size: 16px; letter-spacing: 5px; }
+  .big-card .tarot-corner { font-size: 13px; width: 20px; height: 20px; }
+
+  /* 운세 본문 (카드 아래 따로) */
+  .fortune-body-box {
+    max-width: 520px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, rgba(255, 248, 227, 0.1), rgba(255, 216, 107, 0.08));
+    border: 1px solid rgba(255, 216, 107, 0.35);
+    border-radius: 16px;
+    padding: 22px 26px;
+    backdrop-filter: blur(6px);
+    position: relative;
+    text-align: left;
+  }
+  .reading-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto 16px;
+    padding: 10px 22px;
+    background: linear-gradient(135deg, rgba(255,216,107,0.25), rgba(255,182,230,0.2));
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    font-family: 'Cinzel', serif;
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.25s;
+    position: relative;
+    box-shadow: 0 0 0 0 rgba(255, 216, 107, 0.5);
+    animation: pulseGlow 2.2s ease-in-out infinite;
+  }
+  /* 중앙 정렬 */
+  .reading-toggle-wrap {
+    text-align: center;
+  }
+  .reading-toggle:hover {
+    background: linear-gradient(135deg, rgba(255,216,107,0.4), rgba(255,182,230,0.35));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 216, 107, 0.35);
+  }
+  .reading-toggle:active { transform: translateY(0); }
+  .reading-toggle .toggle-icon {
+    display: inline-flex;
+    width: 18px; height: 18px;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #4a1f6e;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 900;
+    transition: transform 0.4s;
+  }
+  .fortune-body-box.expanded .reading-toggle {
+    background: rgba(255, 216, 107, 0.1);
+    animation: none;
+  }
+  .fortune-body-box.expanded .toggle-icon {
+    transform: rotate(180deg);
+  }
+  .reading-toggle-hint {
+    display: block;
+    font-size: 10px;
+    color: rgba(255, 216, 107, 0.7);
+    letter-spacing: 1px;
+    margin-top: -6px;
+    margin-bottom: 8px;
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 400;
+    text-transform: none;
+  }
+  .fortune-body-box.expanded .reading-toggle-hint { display: none; }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 216, 107, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(255, 216, 107, 0); }
+  }
+  .fortune-body {
+    font-size: 15px;
+    line-height: 2.0;
+    color: #fff8e3;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    font-family: 'Nanum Myeongjo', 'Apple SD Gothic Neo', serif;
+    white-space: pre-line;
+    text-align: left;
+    letter-spacing: 0.3px;
+  }
+  .fortune-body p {
+    margin: 0 0 12px 0;
+  }
+  .fortune-body p:last-child { margin-bottom: 0; }
+  .fortune-body.loading {
+    color: #c8b3e8;
+    font-style: italic;
+    text-align: center;
+  }
+  /* 심층 해석 — 펼침/접힘 */
+  .deep-interp {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+    margin-top: 0;
+  }
+  .fortune-body-box.expanded .deep-interp {
+    max-height: 600px;
+    opacity: 1;
+    margin-top: 18px;
+  }
+  .deep-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,216,107,0.45), transparent);
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .deep-divider::before {
+    content: "✦";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-size: 11px;
+    background: rgba(40, 18, 80, 0.95);
+    padding: 0 8px;
+  }
+  .deep-section {
+    margin-bottom: 16px;
+  }
+  .deep-section:last-child { margin-bottom: 0; }
+  .deep-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+  .deep-text {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #f0e1ff;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    white-space: pre-line;
+    text-align: left;
+    letter-spacing: 0.3px;
+    font-family: 'Nanum Myeongjo', 'Apple SD Gothic Neo', serif;
+  }
+  .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .keyword-chip {
+    background: linear-gradient(135deg, rgba(255,216,107,0.18), rgba(255,182,230,0.15));
+    border: 1px solid rgba(255,216,107,0.4);
+    color: #fff8e3;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ============ 버튼 ============ */
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    border-radius: 999px;
+    padding: 13px 26px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+    letter-spacing: 0.5px;
+  }
+  button:hover:not(:disabled) { transform: translateY(-2px); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #ff9ad6);
+    color: #4a1f6e;
+    box-shadow: 0 8px 22px rgba(255, 154, 214, 0.35);
+  }
+  .btn-ghost {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .btn-big {
+    padding: 16px 36px;
+    font-size: 16px;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0;
+  }
+
+  /* ============ 추첨 박스 ============ */
+  .gacha-box {
+    margin: 24px auto;
+    max-width: 520px;
+    background: linear-gradient(135deg, rgba(255,216,107,0.18), rgba(255,182,230,0.15));
+    border: 1.5px solid rgba(255,216,107,0.45);
+    border-radius: 22px;
+    padding: 22px;
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+  }
+  .gacha-box::before {
+    content: "🎁";
+    position: absolute;
+    top: -10px; right: -10px;
+    font-size: 80px;
+    opacity: 0.15;
+    transform: rotate(15deg);
+  }
+  .gacha-box h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+    color: var(--accent);
+  }
+  .gacha-box .desc {
+    font-size: 13.5px;
+    color: #e8d8ff;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .prize-list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .prize-chip {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #fff;
+    min-width: 100px;
+  }
+  .prize-chip .rank {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  .prize-chip.gold { border-color: var(--gold); }
+  .prize-chip.gold .rank { color: var(--gold); }
+  .prize-chip.silver { border-color: var(--silver); }
+  .prize-chip.silver .rank { color: var(--silver); }
+  .prize-chip.bronze { border-color: var(--bronze); }
+  .prize-chip.bronze .rank { color: var(--bronze); }
+
+  /* 슬롯 머신 */
+  .slot {
+    background: #1a0a3a;
+    border: 3px solid var(--accent);
+    border-radius: 16px;
+    height: 110px;
+    margin: 14px auto;
+    max-width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 0 0 30px rgba(255,216,107,0.3);
+  }
+  .slot-inner {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.1s linear;
+  }
+  .slot-inner.spinning {
+    animation: spin 0.08s linear infinite;
+  }
+  @keyframes spin {
+    from { transform: translateY(0); }
+    to { transform: translateY(-80px); }
+  }
+  .slot-symbol {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    flex-shrink: 0;
+  }
+
+  /* 추첨 결과 */
+  .result-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 5, 50, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+  }
+  .result-modal.show { display: flex; animation: fadeBg 0.4s; }
+  @keyframes fadeBg { from { opacity: 0; } to { opacity: 1; } }
+  .result-box {
+    background: linear-gradient(160deg, #fffaf0 0%, #ffe8f5 60%, #f0e1ff 100%);
+    color: #3a1f6e;
+    border-radius: 24px;
+    padding: 36px 28px;
+    text-align: center;
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+    animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  @keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .result-box .big-emoji {
+    font-size: 80px;
+    margin-bottom: 8px;
+  }
+  .result-box .rank-text {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .result-box .prize-name {
+    font-size: 18px;
+    color: #5e2a8a;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .result-box .msg {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6a4a90;
+    margin-bottom: 20px;
+  }
+  .result-box.gold .rank-text { color: #d4a017; }
+  .result-box.silver .rank-text { color: #888; }
+  .result-box.bronze .rank-text { color: #c67455; }
+  .result-box.miss .rank-text { color: #888; }
+  .result-box .booth-note {
+    background: rgba(255,216,107,0.2);
+    border-left: 3px solid var(--accent);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #5a3a8a;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+
+  /* 컨페티 (1등) */
+  .confetti {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 200;
+    display: none;
+  }
+  .confetti.show { display: block; }
+  .confetti span {
+    position: absolute;
+    width: 10px; height: 10px;
+    top: -20px;
+    animation: confettiFall 3s linear forwards;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0); opacity: 1;}
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0;}
+  }
+
+  /* ============ 홍보 박스 ============ */
+  .promo {
+    margin-top: 24px;
+    background: linear-gradient(135deg, rgba(255,216,107,0.15), rgba(255,182,230,0.12));
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 22px;
+    backdrop-filter: blur(8px);
+    text-align: left;
+  }
+  .promo h3 { font-size: 17px; color: var(--accent); margin-bottom: 8px; }
+  .promo p { font-size: 14px; line-height: 1.7; color: #f0e1ff; }
+  .promo .cta {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.1);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: #fff5d9;
+  }
+
+  /* ============ 설정 ============ */
+  .settings { position: fixed; top: 14px; right: 14px; z-index: 50; }
+  .settings-btn {
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 38px; height: 38px;
+    font-size: 16px;
+    padding: 0;
+  }
+  .settings-panel {
+    position: absolute;
+    top: 46px; right: 0;
+    background: rgba(30, 10, 60, 0.96);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 14px;
+    padding: 16px;
+    width: 340px;
+    display: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: left;
+  }
+  .settings-panel.show { display: block; }
+  .settings-panel label {
+    display: block;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 6px;
+    margin-top: 8px;
+  }
+  .settings-panel input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    font-size: 13px;
+  }
+  .settings-panel .row {
+    display: flex; gap: 6px;
+  }
+  .settings-panel .row input { width: 60px; text-align: center; }
+  .settings-panel .row label { flex: 1; margin: 0; line-height: 30px; font-size: 12px; color: #fff;}
+  .settings-panel .hint {
+    font-size: 11px;
+    color: #c8b3e8;
+    line-height: 1.5;
+    margin: 8px 0;
+  }
+  .settings-panel button {
+    width: 100%;
+    padding: 8px;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .status { font-size: 11px; margin-top: 6px; color: #8c5fb0; }
+  .status.ok { color: #6ee7b7; }
+  .status.err { color: #ffb6b6; }
+
+  .footer-note {
+    margin-top: 24px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="stars2"></div>
+
+<!-- 설정 -->
+<div class="settings">
+  <button class="settings-btn" id="settingsBtn" title="설정">⚙️</button>
+  <div class="settings-panel" id="settingsPanel">
+    <label>Anthropic API Key</label>
+    <input type="password" id="apiKeyInput" placeholder="sk-ant-..." />
+    <div class="status" id="keyStatus"></div>
+
+    <label style="margin-top:14px;">🎁 상품명 설정</label>
+    <input type="text" id="prize1" placeholder="1등 상품" />
+    <input type="text" id="prize2" placeholder="2등 상품" style="margin-top:5px;" />
+    <input type="text" id="prize3" placeholder="3등 상품" style="margin-top:5px;" />
+
+    <label style="margin-top:14px;">🎯 당첨 확률 (%)</label>
+    <div class="row">
+      <label>1등</label><input type="number" id="prob1" min="0" max="100" />
+      <label>2등</label><input type="number" id="prob2" min="0" max="100" />
+      <label>3등</label><input type="number" id="prob3" min="0" max="100" />
+    </div>
+    <div class="hint">합계 100% 미만이면 나머지는 "꽝(참가상)"이 돼요.</div>
+
+    <button class="btn-primary" id="saveBtn">저장</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ========== 0. 입력 화면 ========== -->
+  <div class="screen active" id="screen-input">
+    <span class="badge">🌙 광주청년 일경험드림 사업</span>
+    <h1>당신만의 타로를 위해<br/>두 가지만 알려주세요 ✨</h1>
+    <p class="subtitle">
+      이름과 생년월일로 <b>당신의 별자리와 운명수</b>를 읽어드려요.<br/>
+      세상에 단 하나뿐인 운세가 펼쳐집니다.
+    </p>
+
+    <div class="input-card">
+      <div class="input-group">
+        <label>이름 (또는 닉네임)</label>
+        <input type="text" id="inputName" placeholder="예: 김민지" maxlength="10" />
+      </div>
+      <div class="input-group">
+        <label>생년월일</label>
+        <div class="birthday-row">
+          <input type="number" id="inputYear" placeholder="2002" min="1950" max="2015" />
+          <input type="number" id="inputMonth" placeholder="월" min="1" max="12" />
+          <input type="number" id="inputDay" placeholder="일" min="1" max="31" />
+        </div>
+      </div>
+      <div class="input-group">
+        <label>성별</label>
+        <div class="gender-row" id="genderRow">
+          <button type="button" class="gender-btn" data-gender="female">
+            <span class="em">👩</span>여자
+          </button>
+          <button type="button" class="gender-btn" data-gender="male">
+            <span class="em">👨</span>남자
+          </button>
+        </div>
+        <div class="input-error" id="inputError"></div>
+      </div>
+      <button class="btn-primary btn-big" id="startBtn" style="width:100%;">✨ 타로 시작하기</button>
+    </div>
+  </div>
+
+  <!-- ========== 1. 인트로: 연도 선택 ========== -->
+  <div class="screen" id="screen-select">
+    <span class="badge">🌙 광주청년 일경험드림 사업</span>
+    <h1 id="selectGreeting">당신의 미래 직장운<br/>지금 확인해볼까요? ✨</h1>
+    <div class="user-tag" id="userTag" style="display:none;">
+      <span class="name" id="tagName"></span>
+      <span class="divider">·</span>
+      <span class="meta" id="tagZodiac"></span>
+      <span class="divider">·</span>
+      <span class="meta" id="tagLifePath"></span>
+    </div>
+    <p class="subtitle">
+      <b>몇 년 후</b>의 모습이 가장 궁금하세요?<br/>
+      카드를 한 장 골라 뒤집어 보세요. 그리고… <b>상품 추첨</b>까지! 🎁
+    </p>
+
+    <div class="cards">
+      <div class="card-wrap" data-year="1">
+        <div class="card-label">1년 후</div>
+        <div class="card">
+          <div class="card-face card-back">
+            <div class="symbol">🌱</div>
+            <div class="back-text">PICK ME</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-wrap" data-year="2">
+        <div class="card-label">2년 후</div>
+        <div class="card">
+          <div class="card-face card-back">
+            <div class="symbol">🌸</div>
+            <div class="back-text">PICK ME</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-wrap" data-year="3">
+        <div class="card-label">3년 후</div>
+        <div class="card">
+          <div class="card-face card-back">
+            <div class="symbol">🌟</div>
+            <div class="back-text">PICK ME</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-wrap" data-year="4">
+        <div class="card-label">4년 후</div>
+        <div class="card">
+          <div class="card-face card-back">
+            <div class="symbol">👑</div>
+            <div class="back-text">PICK ME</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gacha-box" style="margin-top:10px;">
+      <h3>🎁 타로 보면 상품 추첨!</h3>
+      <div class="desc">카드를 뽑은 모든 분께 추첨 기회를 드려요.</div>
+      <div class="prize-list" id="prizeList">
+        <div class="prize-chip gold"><span class="rank">🥇 1등</span><span id="p1-label">짱짱한 양우산</span></div>
+        <div class="prize-chip silver"><span class="rank">🥈 2등</span><span id="p2-label">워시백</span></div>
+        <div class="prize-chip bronze"><span class="rank">🥉 3등</span><span id="p3-label">볼펜</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 2. 운세 결과 ========== -->
+  <div class="screen" id="screen-fortune">
+    <span class="step-tag">STEP 1 · 당신의 미래</span>
+    <h1 id="fortuneTitle">✨ 카드를 펼쳤어요</h1>
+    <div class="user-tag" id="userTagFortune" style="display:none;">
+      <span class="name" id="tagNameF"></span>
+      <span class="divider">·</span>
+      <span class="meta" id="tagZodiacF"></span>
+      <span class="divider">·</span>
+      <span class="meta" id="tagLifePathF"></span>
+    </div>
+
+    <div class="big-card card-wrap revealed">
+      <div class="card flipped">
+        <div class="card-face card-back">
+          <div class="symbol" id="resultSymbol">🌟</div>
+        </div>
+        <div class="card-face card-front">
+          <span class="tarot-corner tl">✦</span>
+          <span class="tarot-corner tr">✦</span>
+          <span class="tarot-corner bl">✦</span>
+          <span class="tarot-corner br">✦</span>
+          <div class="tarot-inner">
+            <div class="tarot-roman" id="fRoman">I</div>
+            <div class="tarot-divider"></div>
+            <div class="tarot-art">
+              <div class="tarot-art-bg"></div>
+              <div class="tarot-art-icon" id="fIcon">🔮</div>
+            </div>
+            <div class="tarot-divider"></div>
+            <div class="tarot-title" id="fTitle">THE FUTURE</div>
+            <div class="tarot-subtitle" id="fYear">1년 후</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fortune-body-box" id="fortuneBox">
+      <div class="reading-toggle-wrap">
+        <button class="reading-toggle" id="readingToggle" type="button">
+          ✦ 해석 보기 ✦ <span class="toggle-icon">▼</span>
+        </button>
+        <span class="reading-toggle-hint">눌러서 타로 마스터의 조언을 확인하세요</span>
+      </div>
+      <div class="fortune-body" id="fBody">우주가 답을 준비하고 있어요 ✨</div>
+      <div class="deep-interp" id="deepInterp">
+        <div class="deep-divider"></div>
+        <div class="deep-section">
+          <div class="deep-label">🔮 타로 마스터의 조언</div>
+          <div class="deep-text" id="fAdvice"></div>
+        </div>
+        <div class="deep-section">
+          <div class="deep-label">🌟 행운의 키워드</div>
+          <div class="keywords" id="fKeywords"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-primary btn-big" id="goGacha">🎁 상품 추첨하러 가기</button>
+    </div>
+  </div>
+
+  <!-- ========== 3. 상품 추첨 ========== -->
+  <div class="screen" id="screen-gacha">
+    <span class="step-tag">STEP 2 · 상품 추첨</span>
+    <h1>🎰 행운의 슬롯을 돌려보세요</h1>
+    <p class="subtitle">
+      버튼을 누르면 슬롯이 돌아가요.<br/>
+      <b>🥇 1등 · 🥈 2등 · 🥉 3등</b> 중 하나가 나옵니다!
+    </p>
+
+    <div class="slot">
+      <div class="slot-inner" id="slotInner">
+        <div class="slot-symbol">🥇</div>
+        <div class="slot-symbol">🥈</div>
+        <div class="slot-symbol">🥉</div>
+        <div class="slot-symbol">🎁</div>
+        <div class="slot-symbol">🥇</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-primary btn-big" id="spinBtn">🎲 추첨 시작!</button>
+    </div>
+
+    <div class="gacha-box">
+      <div class="prize-list">
+        <div class="prize-chip gold"><span class="rank">🥇 1등</span><span id="p1-label-2">짱짱한 양우산</span></div>
+        <div class="prize-chip silver"><span class="rank">🥈 2등</span><span id="p2-label-2">워시백</span></div>
+        <div class="prize-chip bronze"><span class="rank">🥉 3등</span><span id="p3-label-2">볼펜</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 4. 최종: 홍보 + 다시하기 ========== -->
+  <div class="screen" id="screen-final">
+    <span class="step-tag">FINAL</span>
+    <h1>오늘의 운세, 그리고 상품 ✨</h1>
+    <p class="subtitle" id="finalSummary"></p>
+
+    <div class="promo">
+      <h3>🌟 운명은 바꿀 수 있어요 — 광주청년 일경험드림과 함께!</h3>
+      <p>
+        <b>광주청년 일경험드림 사업</b>은 광주 청년의 직장 경험과 진로 탐색을 지원하는 프로그램이에요.
+        카드가 보여준 미래를 더 빛나게 만들고 싶다면, 부스에서 자세한 안내를 받아보세요.
+      </p>
+      <div class="cta">
+        👉 <b>참여 방법</b>이 궁금하다면 부스 담당자에게 말 걸어주세요!<br/>
+        또는 QR로 신청 페이지로 이동 📱
+      </div>
+    </div>
+
+    <div class="controls" style="margin-top:24px;">
+      <button class="btn-primary btn-big" id="restartBtn">🔄 다시하기</button>
+    </div>
+  </div>
+
+  <div class="footer-note">© 2026 광주청년 일경험드림 · AI Tarot Booth Edition</div>
+</div>
+
+<!-- 결과 모달 -->
+<div class="result-modal" id="resultModal">
+  <div class="result-box" id="resultBox">
+    <div class="big-emoji" id="resultEmoji">🎉</div>
+    <div class="rank-text" id="resultRank">1등!</div>
+    <div class="prize-name" id="resultPrize">스타벅스 1만원권</div>
+    <div class="msg" id="resultMsg">행운이 당신을 찾아왔어요 ✨</div>
+    <div class="booth-note">
+      📍 <b>부스 담당자</b>에게 이 화면을 보여주고 상품을 받아가세요!
+    </div>
+    <button class="btn-primary" id="closeResult">확인</button>
+  </div>
+</div>
+
+<div class="confetti" id="confetti"></div>
+
+<script>
+/* ============ 데이터 ============ */
+const ICONS = ["🌱","🌸","🌟","👑","🍀","💎","🦋","🔮","💌","🌈","☀️","🎀","🕊️","🪞","🍒"];
+const SYMBOLS = { 1: "🌱", 2: "🌸", 3: "🌟", 4: "👑" };
+
+const FALLBACK = {
+  1: [
+    {
+      title: "첫 발의 빛 · The Spark",
+      body: "낯선 사무실 문을 처음 여는 순간, 어색한 인사와 함께 시작될 거예요.\n처음엔 모든 게 서툴고 작은 실수도 크게 느껴지겠지만, 한 달쯤 지나면 '나도 이 풍경의 일부구나' 싶은 순간이 와요.\n특히 어떤 선배 한 명의 짧은 칭찬이 당신을 1년 내내 버티게 만들 거예요. 그 말을 메모해두세요 — 자신감의 씨앗이 됩니다 🌱",
+      advice: "처음 3개월은 '잘하는 사람'보다 '배우려는 사람'으로 보이는 게 더 큰 자산이에요. 모르는 건 그날 안에 물어보고, 받은 칭찬은 메모장에 남겨두세요.",
+      keywords: ["첫인상", "메모", "용기"]
+    },
+    {
+      title: "예상 밖의 기회 · The Messenger",
+      body: "SNS나 학교 게시판에서 무심코 본 공고 하나가 인생의 방향을 살짝 틀어놓을 거예요.\n'이거 나랑 안 맞을 것 같은데…' 하면서도 지원한 곳에서 의외의 합격 소식이 들려옵니다.\n그곳에서 만난 사람, 배운 일, 다녀온 출근길 — 모두가 당신의 1년 뒤 자기소개서 첫 문장이 돼요. 기회는 늘 '어색한 옷'을 입고 옵니다 ✉️",
+      advice: "'완벽한 타이밍'을 기다리지 말고, 일단 지원 버튼을 눌러보세요. 떨어져도 면접 경험은 남고, 붙으면 인생이 바뀝니다.",
+      keywords: ["도전", "지원", "타이밍"]
+    },
+    {
+      title: "멘토의 등장 · The Hermit",
+      body: "올해 당신을 가장 많이 바꿔놓을 사람은 친구가 아니라 '약간 어른인 누군가'예요.\n인턴십 담당자든, 같이 일한 5년차 선배든, 카페에서 우연히 명함을 받은 사람이든.\n그 사람의 한 문장이 진로 고민을 한 번에 정리해줄 거예요. 커피 한 잔 사드릴 용기만 내세요 ☕\n묻는 자에게만 길이 열립니다.",
+      advice: "마음에 드는 사람이 있으면 '15분만 시간 내주실 수 있을까요?' 라고 먼저 연락하세요. 거절당해도 손해 없고, 응해주면 인생이 짧아져요.",
+      keywords: ["멘토", "질문", "커피챗"]
+    },
+    {
+      title: "포트폴리오의 마법 · The Magician",
+      body: "올해 만든 작은 결과물 하나 — 발표 자료든, 프로젝트 후기든, 짧은 영상이든 — 가 예상치 못한 곳에서 회자돼요.\n'그거 누가 만들었어?' 라는 질문이 당신 이름까지 거슬러 올라옵니다.\n완벽하지 않아도 괜찮으니, 머릿속 아이디어를 일단 '결과물'로 만들어두세요.\n눈에 보이는 것만이 평가받아요 ✨",
+      advice: "이번 달 안에 미루던 결과물 하나를 '70% 완성도'로 세상에 내놓으세요. 100%를 기다리는 동안 기회는 다른 사람에게 갑니다.",
+      keywords: ["결과물", "공개", "기록"]
+    },
+    {
+      title: "단단한 뿌리 · The Tree",
+      body: "드라마틱한 사건은 없을지 몰라요. 합격 발표 전화나 박수받는 무대는 아직 멀어 보일 거예요.\n하지만 이 1년은 '뿌리를 내리는 해'입니다. 출퇴근의 리듬, 사람 대하는 톤, 메일 쓰는 법 — 작은 것들이 진짜 실력의 토양이 돼요.\n남들 눈에 안 띄는 시간이 가장 두꺼운 나이테가 됩니다 🌳",
+      advice: "지금의 '평범한 하루'를 의심하지 마세요. 매일 30분씩 쌓은 작은 습관이 3년 뒤 당신의 무기가 됩니다.",
+      keywords: ["루틴", "기본기", "인내"]
+    }
+  ],
+  2: [
+    {
+      title: "두 번째 도약 · The Chariot",
+      body: "2년 차쯤 되면 '이대로 괜찮은가?' 하는 질문이 머리를 떠나지 않을 거예요.\n그 답답함이 곧 도약의 신호입니다. 이직 제안, 부서 이동, 혹은 새로운 프로젝트의 리드 — 셋 중 하나는 반드시 와요.\n익숙함이 주는 안정을 살짝 흔들 용기만 있다면, 더 잘 맞는 동료와 더 큰 무대가 기다리고 있어요 🚀",
+      advice: "이력서를 6개월에 한 번씩 업데이트하는 습관을 들이세요. 이직 안 해도 '내가 뭘 해왔는지' 정리하는 것만으로 다음 길이 보입니다.",
+      keywords: ["이직", "도약", "다음 챕터"]
+    },
+    {
+      title: "프로젝트의 주인공 · The Star",
+      body: "팀에서 '이건 네가 맡아줘'라는 말을 처음 듣는 순간이 와요.\n떨리고, 잠 못 자고, 새벽까지 자료 만들고… 그래도 결국 해냅니다.\n그 프로젝트가 끝난 날, 거울 속 당신의 표정이 작년과 완전히 달라져 있을 거예요.\n결과보다 '나 이걸 끝까지 해냈다'는 경험이 평생 자산이 됩니다 ⭐",
+      advice: "큰 일을 맡으면 '못할 것 같은데'와 '해볼게요' 사이에서 후자를 고르세요. 능력은 일을 받고 나서 자랍니다.",
+      keywords: ["책임", "완주", "자신감"]
+    },
+    {
+      title: "사이드의 발견 · The Hidden Path",
+      body: "본업 외에 시작한 작은 일 — 블로그, 사이드 프로젝트, 동아리 활동, 취미 — 이 본업보다 빛나기 시작해요.\n사람들이 본업이 아닌 '그 다른 것' 때문에 당신을 찾아옵니다.\n부캐가 본캐를 흔드는 순간, 진짜 적성이 드러나요.\n둘 다 잡을지, 하나에 올인할지 — 올해 안에 답이 보입니다 ✨",
+      advice: "본업 외에 '돈은 안 되지만 즐거운 일' 하나를 꾸준히 하세요. 진짜 적성은 자유 시간에 자발적으로 하는 일에 숨어 있어요.",
+      keywords: ["사이드", "취향", "재능"]
+    },
+    {
+      title: "동료라는 자산 · The Lovers",
+      body: "월급 명세서보다 카톡방 동료 목록이 더 든든해지는 해예요.\n같이 야근하며 배달 시켜 먹은 사람, 퇴사 후에도 안부 묻는 선배, 같은 직군 모임에서 만난 동지들.\n돈으로 못 사는 인맥이 이때 만들어집니다.\n5년, 10년 뒤 당신을 '아는 사람'으로 부를 사람들이 지금 옆자리에 앉아 있어요 💌",
+      advice: "퇴사나 이직한 동료에게 분기마다 한 번씩 안부 메시지를 보내세요. 인맥은 '필요할 때'가 아니라 '평소'에 만들어집니다.",
+      keywords: ["동료", "연결", "신뢰"]
+    },
+    {
+      title: "전문성의 윤곽 · The Craftsman",
+      body: "'나는 어떤 사람이지?'라는 막연한 질문이 '나는 이런 일을 잘하는 사람'으로 또렷해져요.\n남들이 헤매는 부분을 당신은 손쉽게 풀어내고, 누군가 당신에게 '그거 어떻게 했어?' 라고 물어보는 횟수가 늘어납니다.\n이 감각이 진짜 커리어의 시작이에요.\n잘하는 것 하나만 똑똑히 알아도 길은 열려요 🛠️",
+      advice: "남들이 자주 묻는 질문 3개를 노트에 적어두세요. 그게 바로 당신의 '판매 가능한 전문성'이에요.",
+      keywords: ["강점", "차별화", "정체성"]
+    }
+  ],
+  3: [
+    {
+      title: "리더의 자리 · The Emperor",
+      body: "후배가 생기고, 회의에서 '○○님 의견은요?' 라는 질문이 자연스러워지는 해예요.\n처음엔 부담스럽다가, 어느 순간 당신이 회의 흐름을 만들고 있다는 걸 발견하게 됩니다.\n말 한마디에 무게가 실리고, 결정 한 번에 팀 분위기가 바뀌어요.\n리더십은 직책이 아니라 '신뢰의 누적'이라는 걸 몸으로 배우는 해 👑",
+      advice: "후배에게 답을 주려 하지 말고 질문을 던지세요. 좋은 리더는 똑똑한 사람이 아니라, 똑똑한 질문을 하는 사람입니다.",
+      keywords: ["리더십", "결정", "신뢰"]
+    },
+    {
+      title: "갈림길의 카드 · The Crossroads",
+      body: "올해 두 갈래 길이 동시에 펼쳐집니다. 안정적인 한 길과, 두근거리는 다른 한 길.\n주변 사람들은 안정을 권할 거예요. 하지만 가슴이 더 빠르게 뛰는 쪽으로 가도 괜찮아요.\n3년 차의 선택은 인생 전체의 톤을 결정해요.\n망설인 길은 평생 후회로 남고, 도전한 길은 어떻게든 이야기가 됩니다 🛤️",
+      advice: "고민될 땐 '80세의 내가 어떤 선택을 더 후회할까?'를 물어보세요. 답은 늘 도전 쪽에 있습니다.",
+      keywords: ["선택", "후회 없음", "방향"]
+    },
+    {
+      title: "이름의 시간 · The Star Rises",
+      body: "업계에서 당신 이름을 먼저 아는 사람이 생기는 해예요.\n명함을 건네기 전에 '아, ○○님 얘기 들었어요' 라는 인사가 돌아오기 시작합니다.\nSNS, 발표, 작은 인터뷰 — 평판이 명함보다 앞서 도착해요.\n조금 부끄러워도 자기 이름 걸고 결과물을 내놓는 습관을 들이세요. 그게 평판의 재료가 됩니다 🌟",
+      advice: "한 달에 한 번씩 '내가 한 일'을 SNS나 글로 공유하세요. 침묵은 겸손이 아니라 손해예요.",
+      keywords: ["평판", "공유", "브랜딩"]
+    },
+    {
+      title: "더 넓은 무대 · The World",
+      body: "출장, 협업, 해외 연수, 외부 미팅 — 사무실 너머의 세계가 손짓하기 시작해요.\n영어든 다른 언어든, 외국인 동료와 일하는 경험이 생기거나, 다른 도시·국가로 떠날 기회가 와요.\n지금까지의 좁은 시야가 한 번에 확장되는 순간입니다.\n여권과 짐가방을 미리 준비해두세요 ✈️",
+      advice: "외부 행사·컨퍼런스 하나를 매 분기마다 참석하세요. 새로운 풍경이 새로운 기회를 만들어줍니다.",
+      keywords: ["확장", "글로벌", "네트워크"]
+    },
+    {
+      title: "전문가의 인증 · The High Priestess",
+      body: "자격증, 발표 무대, 사내 강의, 외부 인터뷰 — '진짜 전문가'라는 라벨이 처음 붙는 해예요.\n남들이 보기엔 갑작스러운 도약 같겠지만, 사실 1·2년 차에 쌓아둔 디테일이 폭발하는 거예요.\n공식적인 '인증 도장'이 찍히는 순간, 자기 의심이 사라집니다.\n드디어 '되고 싶었던 나'와 '지금의 나'가 만나요 🎓",
+      advice: "발표·강의 요청이 오면 거절하지 말고 받으세요. 가르치는 순간 가장 빠르게 배우게 됩니다.",
+      keywords: ["전문성", "인증", "공식화"]
+    }
+  ],
+  4: [
+    {
+      title: "당신만의 무대 · The Sun",
+      body: "지금까지의 모든 경험이 한 점에서 만나는 해예요.\n누군가 깔아준 무대가 아니라, 당신이 직접 만든 무대 위에 서게 됩니다.\n창업, 독립, 새 부서 창설, 큰 직책 — 형태는 달라도 '내 이름을 건 일'이 시작돼요.\n4년간 모아둔 모든 카드가 비로소 펼쳐지는 순간입니다.\n주인공으로 사는 법을 배우게 돼요 ☀️",
+      advice: "'내가 만들고 싶은 일'을 한 문장으로 적어보세요. 그 문장이 지금의 회사를 떠날 용기와 머물 이유를 동시에 정해줍니다.",
+      keywords: ["독립", "주인공", "결정권"]
+    },
+    {
+      title: "롤모델의 자리 · The Lighthouse",
+      body: "후배나 동생들이 진지하게 진로를 물어보러 찾아오는 해예요.\n'언니/누나처럼 되고 싶어요' 라는 말을 듣는 순간, 묘하게 책임감이 무겁고 또 뿌듯합니다.\n당신이 4년 전 누군가에게 받았던 그 한마디를, 이제는 당신이 누군가에게 건네줘요.\n등대는 자기를 비추지 않고 멀리 있는 배를 비춥니다 🕯️",
+      advice: "후배에게 시간을 내주는 걸 '낭비'라 생각하지 마세요. 가르치며 정리되는 게 더 많고, 그 인연이 나중에 동료가 됩니다.",
+      keywords: ["멘토링", "환원", "영향력"]
+    },
+    {
+      title: "균형의 완성 · The Temperance",
+      body: "일과 삶, 돈과 의미, 관계와 혼자만의 시간 — 그동안 어느 한쪽으로 기울어 있던 추가 비로소 균형을 잡아요.\n번아웃 없이도 일을 잘하는 법, 친구도 가족도 일도 다 챙기는 페이스를 몸으로 익힙니다.\n이 균형이 다음 10년의 토대가 돼요.\n드디어 '어른의 일상'이 시작됩니다 ⚖️",
+      advice: "주 1회는 '아무것도 안 하는 시간'을 의무로 잡아두세요. 쉼은 게으름이 아니라 지속 가능성의 비결이에요.",
+      keywords: ["밸런스", "지속성", "건강"]
+    },
+    {
+      title: "큰 결실 · The Harvest",
+      body: "4년간 뿌려둔 씨앗이 한 번에 거둬지는 해입니다.\n수상, 승진, 큰 계약, 의미 있는 보너스 — 형태는 다양해도 '아, 이게 그 보상이구나' 싶은 순간이 와요.\n주변에선 '갑자기 잘됐네' 라고 말하겠지만, 당신만은 알아요. 갑자기가 아니라는 걸.\n노력은 늦게 도착할 뿐, 절대 사라지지 않습니다 🍀",
+      advice: "큰 보상을 받으면 그 다음 씨앗을 바로 심으세요. 정점에서 멈추는 사람과 다음을 준비하는 사람의 차이는 5년 뒤 갈립니다.",
+      keywords: ["보상", "수확", "감사"]
+    },
+    {
+      title: "재정의된 성공 · The Mirror",
+      body: "남들의 기준(연봉, 직책, 회사 이름)이 아닌, 당신만의 성공 정의를 갖게 되는 해예요.\n'내가 정의한 잘 사는 것'이 또렷해지면서, 비교에서 자유로워집니다.\n누군가에겐 작아 보일지 몰라도, 당신에게는 그것이 진짜 정답이에요.\n진짜 어른은 스스로의 기준으로 자기를 평가하는 사람입니다 🪞",
+      advice: "올해 안에 '나에게 성공이란?'을 세 문장으로 정의해서 적어두세요. 흔들릴 때마다 그 문장이 나침반이 됩니다.",
+      keywords: ["자기 기준", "성숙", "자유"]
+    }
+  ]
+};
+
+/* ============ 별자리 & 운명수 계산 ============ */
+function getZodiac(month, day) {
+  const z = [
+    { name: "염소자리", emoji: "♑", start: [12, 22], end: [1, 19], traits: "성실, 야망, 책임감" },
+    { name: "물병자리", emoji: "♒", start: [1, 20], end: [2, 18], traits: "독창성, 자유, 혁신" },
+    { name: "물고기자리", emoji: "♓", start: [2, 19], end: [3, 20], traits: "직관, 감수성, 예술성" },
+    { name: "양자리", emoji: "♈", start: [3, 21], end: [4, 19], traits: "도전, 추진력, 리더십" },
+    { name: "황소자리", emoji: "♉", start: [4, 20], end: [5, 20], traits: "끈기, 안정, 미적 감각" },
+    { name: "쌍둥이자리", emoji: "♊", start: [5, 21], end: [6, 20], traits: "호기심, 적응력, 소통" },
+    { name: "게자리", emoji: "♋", start: [6, 21], end: [7, 22], traits: "공감, 보살핌, 직관" },
+    { name: "사자자리", emoji: "♌", start: [7, 23], end: [8, 22], traits: "자신감, 카리스마, 무대 체질" },
+    { name: "처녀자리", emoji: "♍", start: [8, 23], end: [9, 22], traits: "분석력, 완벽주의, 실용" },
+    { name: "천칭자리", emoji: "♎", start: [9, 23], end: [10, 22], traits: "균형, 외교, 미적 감각" },
+    { name: "전갈자리", emoji: "♏", start: [10, 23], end: [11, 21], traits: "집중력, 통찰, 열정" },
+    { name: "사수자리", emoji: "♐", start: [11, 22], end: [12, 21], traits: "낙천, 모험, 솔직함" }
+  ];
+  for (const s of z) {
+    if (s.name === "염소자리") {
+      if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) return s;
+    } else {
+      const [sm, sd] = s.start, [em, ed] = s.end;
+      if ((month === sm && day >= sd) || (month === em && day <= ed)) return s;
+    }
+  }
+  return z[0];
+}
+
+function getLifePath(year, month, day) {
+  const digits = (year + '' + month + '' + day).split('').map(Number);
+  let sum = digits.reduce((a, b) => a + b, 0);
+  // master numbers 11, 22, 33 유지
+  while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+    sum = (sum + '').split('').map(Number).reduce((a, b) => a + b, 0);
+  }
+  const meanings = {
+    1: { name: "리더의 길", traits: "개척, 독립, 추진력" },
+    2: { name: "조율의 길", traits: "협력, 직관, 균형" },
+    3: { name: "표현의 길", traits: "창의, 소통, 즐거움" },
+    4: { name: "건축가의 길", traits: "성실, 기초, 안정" },
+    5: { name: "자유로운 영혼", traits: "변화, 모험, 자유" },
+    6: { name: "돌봄의 길", traits: "책임, 사랑, 조화" },
+    7: { name: "탐구자의 길", traits: "분석, 통찰, 영성" },
+    8: { name: "성취의 길", traits: "성공, 권력, 물질" },
+    9: { name: "현자의 길", traits: "지혜, 봉사, 완성" },
+    11: { name: "직관의 마스터", traits: "영감, 비전, 깨달음 (마스터 수)" },
+    22: { name: "마스터 빌더", traits: "거대한 실현, 비전 구축 (마스터 수)" },
+    33: { name: "마스터 티처", traits: "큰 사랑, 가르침, 헌신 (마스터 수)" }
+  };
+  return { number: sum, ...meanings[sum] };
+}
+
+/* ============ 상태 ============ */
+const DEFAULTS = {
+  prize1: "짱짱한 양우산",
+  prize2: "워시백",
+  prize3: "볼펜",
+  prob1: 5,
+  prob2: 10,
+  prob3: 85,
+};
+const state = {
+  apiKey: localStorage.getItem('anthropic_api_key') || '',
+  prize1: localStorage.getItem('prize1') || DEFAULTS.prize1,
+  prize2: localStorage.getItem('prize2') || DEFAULTS.prize2,
+  prize3: localStorage.getItem('prize3') || DEFAULTS.prize3,
+  prob1: parseInt(localStorage.getItem('prob1') ?? DEFAULTS.prob1, 10),
+  prob2: parseInt(localStorage.getItem('prob2') ?? DEFAULTS.prob2, 10),
+  prob3: parseInt(localStorage.getItem('prob3') ?? DEFAULTS.prob3, 10),
+  selectedYear: null,
+  fortune: null,
+  prize: null,
+  user: { name: '', year: 0, month: 0, day: 0, gender: '', zodiac: null, lifePath: null },
+};
+
+/* ============ 화면 전환 ============ */
+function show(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============ 설정 패널 ============ */
+const $ = id => document.getElementById(id);
+const settingsBtn = $('settingsBtn');
+const settingsPanel = $('settingsPanel');
+
+function loadSettingsUI() {
+  $('apiKeyInput').value = state.apiKey;
+  $('prize1').value = state.prize1;
+  $('prize2').value = state.prize2;
+  $('prize3').value = state.prize3;
+  $('prob1').value = state.prob1;
+  $('prob2').value = state.prob2;
+  $('prob3').value = state.prob3;
+  refreshPrizeLabels();
+  updateKeyStatus();
+}
+
+function refreshPrizeLabels() {
+  ['p1-label','p1-label-2'].forEach(id => { const el = $(id); if (el) el.textContent = state.prize1; });
+  ['p2-label','p2-label-2'].forEach(id => { const el = $(id); if (el) el.textContent = state.prize2; });
+  ['p3-label','p3-label-2'].forEach(id => { const el = $(id); if (el) el.textContent = state.prize3; });
+}
+
+settingsBtn.addEventListener('click', () => settingsPanel.classList.toggle('show'));
+
+$('saveBtn').addEventListener('click', () => {
+  state.apiKey = $('apiKeyInput').value.trim();
+  state.prize1 = $('prize1').value.trim() || DEFAULTS.prize1;
+  state.prize2 = $('prize2').value.trim() || DEFAULTS.prize2;
+  state.prize3 = $('prize3').value.trim() || DEFAULTS.prize3;
+  state.prob1 = clamp(parseInt($('prob1').value, 10), 0, 100);
+  state.prob2 = clamp(parseInt($('prob2').value, 10), 0, 100);
+  state.prob3 = clamp(parseInt($('prob3').value, 10), 0, 100);
+  localStorage.setItem('anthropic_api_key', state.apiKey);
+  localStorage.setItem('prize1', state.prize1);
+  localStorage.setItem('prize2', state.prize2);
+  localStorage.setItem('prize3', state.prize3);
+  localStorage.setItem('prob1', state.prob1);
+  localStorage.setItem('prob2', state.prob2);
+  localStorage.setItem('prob3', state.prob3);
+  refreshPrizeLabels();
+  updateKeyStatus();
+  settingsPanel.classList.remove('show');
+});
+
+function clamp(n, min, max) {
+  if (isNaN(n)) return min;
+  return Math.max(min, Math.min(max, n));
+}
+
+function updateKeyStatus() {
+  const el = $('keyStatus');
+  if (state.apiKey && state.apiKey.startsWith('sk-ant-')) {
+    el.textContent = '✅ AI 운세 모드 (실시간 생성)'; el.className = 'status ok';
+  } else if (state.apiKey) {
+    el.textContent = '⚠️ 키 형식이 이상해요. sk-ant- 로 시작'; el.className = 'status err';
+  } else {
+    el.textContent = '💡 키 없음 → 기본 운세 모드'; el.className = 'status';
+  }
+}
+
+loadSettingsUI();
+
+/* ============ STEP 0: 이름 + 생년월일 + 성별 입력 ============ */
+let selectedGender = '';
+document.querySelectorAll('#genderRow .gender-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#genderRow .gender-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedGender = btn.dataset.gender;
+  });
+});
+
+$('startBtn').addEventListener('click', () => {
+  const name = $('inputName').value.trim();
+  const year = parseInt($('inputYear').value, 10);
+  const month = parseInt($('inputMonth').value, 10);
+  const day = parseInt($('inputDay').value, 10);
+  const errEl = $('inputError');
+
+  if (!name) { errEl.textContent = '이름(닉네임)을 입력해 주세요.'; return; }
+  if (!year || year < 1950 || year > 2015) { errEl.textContent = '연도를 정확히 입력해 주세요.'; return; }
+  if (!month || month < 1 || month > 12) { errEl.textContent = '월은 1~12 사이로 입력해 주세요.'; return; }
+  if (!day || day < 1 || day > 31) { errEl.textContent = '일은 1~31 사이로 입력해 주세요.'; return; }
+  // 날짜 유효성
+  const d = new Date(year, month - 1, day);
+  if (d.getFullYear() !== year || d.getMonth() !== month - 1 || d.getDate() !== day) {
+    errEl.textContent = '존재하지 않는 날짜예요.'; return;
+  }
+  if (!selectedGender) { errEl.textContent = '성별을 선택해 주세요.'; return; }
+  errEl.textContent = '';
+
+  const zodiac = getZodiac(month, day);
+  const lifePath = getLifePath(year, month, day);
+  state.user = { name, year, month, day, gender: selectedGender, zodiac, lifePath };
+
+  // 선택 화면 호명 + 태그
+  $('selectGreeting').innerHTML = `${name}님,<br/>몇 년 후가 가장 궁금하세요? ✨`;
+  $('userTag').style.display = 'inline-flex';
+  $('tagName').textContent = `🌙 ${name}`;
+  $('tagZodiac').innerHTML = `${zodiac.emoji} <b>${zodiac.name}</b>`;
+  $('tagLifePath').innerHTML = `🔢 운명수 <b>${lifePath.number}</b> · ${lifePath.name}`;
+
+  show('screen-select');
+});
+
+// 엔터키 처리
+['inputName','inputYear','inputMonth','inputDay'].forEach(id => {
+  $(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') $('startBtn').click();
+  });
+});
+
+/* ============ STEP 1: 카드 선택 → 운세 ============ */
+document.querySelectorAll('#screen-select .card-wrap').forEach(wrap => {
+  wrap.addEventListener('click', async () => {
+    const year = parseInt(wrap.dataset.year, 10);
+    state.selectedYear = year;
+
+    // 다른 카드 사라지게
+    document.querySelectorAll('#screen-select .card-wrap').forEach(w => {
+      if (w !== wrap) w.classList.add('disabled');
+    });
+    wrap.querySelector('.card').classList.add('flipped');
+
+    // 살짝 대기 후 결과 화면
+    await new Promise(r => setTimeout(r, 700));
+
+    // 운세 생성 (로딩 UI 먼저 보여주기)
+    const ROMAN = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV' };
+    $('resultSymbol').textContent = SYMBOLS[year];
+    $('fRoman').textContent = ROMAN[year];
+    $('fYear').textContent = `${year}년 후`;
+    $('fIcon').textContent = '🔮';
+    $('fTitle').innerHTML = `<span class="title-ko">읽는 중...</span><span class="title-en">Reading the Cards</span>`;
+    $('fBody').className = 'fortune-body loading';
+    $('fBody').textContent = '우주가 답을 준비하고 있어요 ✨';
+    // 사용자 태그 + 호명
+    const u = state.user;
+    if (u.name) {
+      $('fortuneTitle').innerHTML = `✨ ${u.name}님의 <b style="color:var(--accent);">${year}년 후</b>`;
+      $('userTagFortune').style.display = 'inline-flex';
+      $('tagNameF').textContent = `🌙 ${u.name}`;
+      $('tagZodiacF').innerHTML = `${u.zodiac.emoji} <b>${u.zodiac.name}</b>`;
+      $('tagLifePathF').innerHTML = `🔢 운명수 <b>${u.lifePath.number}</b>`;
+    }
+    show('screen-fortune');
+
+    const fortune = await generateFortune(year);
+    state.fortune = fortune;
+    $('fIcon').textContent = fortune.icon;
+
+    // 카드 제목: "한글 · English" 형식을 두 줄로 분리
+    const titleParts = (fortune.title || '').split(/\s*[·•]\s*/);
+    const titleKo = escapeHtml(titleParts[0] || '미래의 한 장면');
+    const titleEn = escapeHtml(titleParts[1] || '');
+    $('fTitle').innerHTML = `<span class="title-ko">${titleKo}</span>` +
+      (titleEn ? `<span class="title-en">${titleEn}</span>` : '');
+
+    // 본문: 줄바꿈마다 단락(<p>)으로 분리 → 문장별 여백
+    $('fBody').className = 'fortune-body';
+    const paragraphs = (fortune.body || '').split(/\n+/).map(p => p.trim()).filter(Boolean);
+    $('fBody').innerHTML = paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+    $('fAdvice').textContent = fortune.advice || '';
+    const kwBox = $('fKeywords');
+    kwBox.innerHTML = '';
+    (fortune.keywords || []).forEach(k => {
+      const chip = document.createElement('span');
+      chip.className = 'keyword-chip';
+      chip.textContent = '# ' + k;
+      kwBox.appendChild(chip);
+    });
+    // 새 운세 뽑을 때마다 해석은 접힌 상태로 시작
+    $('fortuneBox').classList.remove('expanded');
+  });
+});
+
+function pickIcon() { return ICONS[Math.floor(Math.random() * ICONS.length)]; }
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+function fallbackFortune(year) {
+  const u = state.user;
+  // 운명수 + 별자리 기반으로 카드 선택 (사람마다 다른 결과)
+  let list = FALLBACK[year];
+  if (u.name && u.lifePath && u.zodiac) {
+    const seed = u.lifePath.number + u.zodiac.name.length + u.name.length + year * 7;
+    const idx = seed % list.length;
+    var f = list[idx];
+  } else {
+    var f = list[Math.floor(Math.random() * list.length)];
+  }
+
+  // 개인화된 도입 한 줄 prepend
+  let personalBody = f.body;
+  let personalAdvice = f.advice || '';
+  if (u.name && u.zodiac && u.lifePath) {
+    const intros = [
+      `${u.zodiac.name}답게 ${u.zodiac.traits.split(',')[0].trim()}의 기운을 타고난 ${u.name}님, 카드가 이렇게 말해요.\n\n`,
+      `운명수 ${u.lifePath.number}의 길 — '${u.lifePath.name}'을 걷는 ${u.name}님께 펼쳐진 풍경이에요.\n\n`,
+      `${u.name}님의 ${u.zodiac.name} 별자리 위로 ${u.lifePath.name}의 카드가 떨어졌어요.\n\n`
+    ];
+    personalBody = intros[(u.lifePath.number + year) % intros.length] + f.body;
+    if (personalAdvice) {
+      personalAdvice = `${u.zodiac.name}의 ${u.zodiac.traits.split(',')[0].trim()} 기운을 살려서 — ` + personalAdvice;
+    }
+  }
+
+  return {
+    icon: pickIcon(),
+    title: f.title,
+    body: personalBody,
+    advice: personalAdvice,
+    keywords: f.keywords || []
+  };
+}
+
+// Your Reading 토글
+$('readingToggle').addEventListener('click', () => {
+  $('fortuneBox').classList.toggle('expanded');
+});
+
+async function generateFortune(year) {
+  if (!state.apiKey || !state.apiKey.startsWith('sk-ant-')) {
+    await new Promise(r => setTimeout(r, 800 + Math.random()*500));
+    return fallbackFortune(year);
+  }
+  try {
+    const u = state.user;
+    const genderLabel = u.gender === 'female' ? '여성' : '남성';
+    const genderTone = u.gender === 'female'
+      ? '여성 청년이 공감할 만한 톤 (다정, 섬세)'
+      : '남성 청년이 공감할 만한 톤 (간결, 단단함)';
+    const userBlock = u.name ? `
+참가자 정보 (반드시 운세에 자연스럽게 반영):
+- 이름: ${u.name}
+- 생년월일: ${u.year}년 ${u.month}월 ${u.day}일
+- 성별: ${genderLabel}
+- 별자리: ${u.zodiac.name} (${u.zodiac.traits})
+- 운명수: ${u.lifePath.number} — ${u.lifePath.name} (${u.lifePath.traits})
+
+위 정보를 바탕으로 ${u.name}님에게만 어울리는 맞춤 운세를 봐주세요.
+- 별자리의 성향과 운명수의 길을 ${year}년 후의 직장 운세에 자연스럽게 녹여서, "당신은 ○○자리답게..." 또는 "운명수 ${u.lifePath.number}의 길을 걷는 당신은..." 같은 표현을 본문이나 조언에 한 번씩 포함
+- 어조는 ${genderTone}` : '';
+
+    const prompt = `당신은 따뜻하고 위트있는 타로 마스터예요. 광주청년 "일경험드림" 사업 홍보 부스에서 청년 참가자에게 "${year}년 후 직장운"을 봐주는 상황이에요.
+${userBlock}
+
+다음 JSON 형식으로만 답해주세요 (다른 텍스트 절대 X):
+{
+  "icon": "이모지 1개 (카드 중앙에 들어갈 상징적인 이모지)",
+  "title": "카드 이름 (한글 카드명 + ' · ' + 영문 부제, 예: '첫 발의 빛 · The Spark')",
+  "body": "운세 본문 (3~4문장, 180~260자, 줄바꿈 \\n, 다정한 존댓말, 마지막에 이모지 1개)",
+  "advice": "타로 마스터의 실용 조언 (1~2문장, 70~110자, 지금 당장 실천할 수 있는 구체적 행동 1가지 + 짧은 이유)",
+  "keywords": ["행운 키워드1", "행운 키워드2", "행운 키워드3"]
+}
+
+작성 규칙:
+- ${year}년 후의 직장/커리어/일 운세에 집중
+- body 첫 문장: 구체적인 장면 묘사 (첫 출근, 회의, 카톡 알림 등 영화의 한 컷처럼)
+- body 중간: 그 장면에서의 변화나 만남
+- body 마지막: 격언처럼 짧은 통찰
+- advice: 진부함 금지. "노력하세요/포기하지 마세요" 같은 추상적 말 X. "이번 달 안에 X명에게 연락해보세요" 처럼 구체적
+- keywords: 2~5자 짧은 단어, 명사 위주 (예: "용기", "메모", "첫인상")
+- 진부한 표현 금지 (꿈을 향해 / 노력하면 / 화이팅 등 X)
+- 청년이 듣고 설레고 위로받을 만한 톤, 살짝 시적이게
+- 줄바꿈은 반드시 \\n 으로 (실제 줄바꿈 X, JSON 파싱 가능해야 함)`;
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': state.apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5',
+        max_tokens: 800,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    if (!res.ok) { console.warn('API', res.status); return fallbackFortune(year); }
+    const data = await res.json();
+    const text = data?.content?.[0]?.text?.trim() || '';
+    const m = text.match(/\{[\s\S]*\}/);
+    if (!m) return fallbackFortune(year);
+    const p = JSON.parse(m[0]);
+    return {
+      icon: p.icon || pickIcon(),
+      title: p.title || '미래의 한 장면',
+      body: p.body || '',
+      advice: p.advice || '',
+      keywords: Array.isArray(p.keywords) ? p.keywords.slice(0, 4) : []
+    };
+  } catch (e) {
+    console.warn(e);
+    return fallbackFortune(year);
+  }
+}
+
+/* ============ STEP 2: 상품 추첨 ============ */
+$('goGacha').addEventListener('click', () => show('screen-gacha'));
+
+$('spinBtn').addEventListener('click', () => {
+  $('spinBtn').disabled = true;
+  const inner = $('slotInner');
+  inner.classList.add('spinning');
+
+  // 추첨 결과 결정
+  const prize = drawPrize();
+  state.prize = prize;
+
+  // 2초 정도 돌리고 결과 표시
+  setTimeout(() => {
+    inner.classList.remove('spinning');
+    // 슬롯에 최종 이모지 표시
+    const finalEmoji = prize.rank === 1 ? '🥇' : prize.rank === 2 ? '🥈' : prize.rank === 3 ? '🥉' : '🎁';
+    inner.innerHTML = `<div class="slot-symbol">${finalEmoji}</div>`;
+    setTimeout(() => showResult(prize), 400);
+  }, 2200);
+});
+
+function drawPrize() {
+  const r = Math.random() * 100;
+  if (r < state.prob1) return { rank: 1, name: state.prize1, emoji: '🥇', cls: 'gold' };
+  if (r < state.prob1 + state.prob2) return { rank: 2, name: state.prize2, emoji: '🥈', cls: 'silver' };
+  if (r < state.prob1 + state.prob2 + state.prob3) return { rank: 3, name: state.prize3, emoji: '🥉', cls: 'bronze' };
+  return { rank: 0, name: '참가상 · 일경험드림 굿즈', emoji: '🎁', cls: 'miss' };
+}
+
+function showResult(prize) {
+  const modal = $('resultModal');
+  const box = $('resultBox');
+  box.className = 'result-box ' + prize.cls;
+  $('resultEmoji').textContent = prize.emoji;
+  if (prize.rank === 0) {
+    $('resultRank').textContent = '아쉬워요!';
+    $('resultMsg').textContent = '오늘은 살짝 아쉽지만, 운세는 분명 빛나고 있어요 ✨';
+  } else {
+    $('resultRank').textContent = `${prize.rank}등 당첨! 🎉`;
+    const msgs = {
+      1: '대박! 우주가 당신을 콕 집었어요 ✨',
+      2: '운이 좋아요! 멋진 하루의 시작이에요 💫',
+      3: '소소하지만 확실한 행운! 🍀'
+    };
+    $('resultMsg').textContent = msgs[prize.rank];
+  }
+  $('resultPrize').textContent = prize.name;
+  modal.classList.add('show');
+  if (prize.rank === 1) fireConfetti();
+}
+
+$('closeResult').addEventListener('click', () => {
+  $('resultModal').classList.remove('show');
+  // 최종 화면으로
+  const summary = state.fortune
+    ? `${state.selectedYear}년 후 — <b>${state.fortune.title}</b><br/>그리고… <b>${state.prize.rank === 0 ? '참가상' : state.prize.rank+'등 '+state.prize.name}</b> ${state.prize.emoji}`
+    : '';
+  $('finalSummary').innerHTML = summary;
+  show('screen-final');
+});
+
+/* ============ 컨페티 ============ */
+function fireConfetti() {
+  const c = $('confetti');
+  c.innerHTML = '';
+  const colors = ['#ffd86b','#ffb6e6','#fff','#b25fc4','#6ee7b7'];
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('span');
+    s.style.left = Math.random() * 100 + '%';
+    s.style.background = colors[Math.floor(Math.random()*colors.length)];
+    s.style.animationDelay = (Math.random() * 0.8) + 's';
+    s.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+    s.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    c.appendChild(s);
+  }
+  c.classList.add('show');
+  setTimeout(() => c.classList.remove('show'), 3500);
+}
+
+/* ============ 리셋 ============ */
+$('restartBtn').addEventListener('click', () => {
+  state.selectedYear = null;
+  state.fortune = null;
+  state.prize = null;
+  state.user = { name: '', year: 0, month: 0, day: 0, gender: '', zodiac: null, lifePath: null };
+  // 입력값 비우기
+  $('inputName').value = '';
+  $('inputYear').value = '';
+  $('inputMonth').value = '';
+  $('inputDay').value = '';
+  $('inputError').textContent = '';
+  selectedGender = '';
+  document.querySelectorAll('#genderRow .gender-btn').forEach(b => b.classList.remove('selected'));
+  // 카드 원복
+  document.querySelectorAll('#screen-select .card-wrap').forEach(w => {
+    w.classList.remove('disabled');
+    w.querySelector('.card').classList.remove('flipped');
+  });
+  // 사용자 태그 숨기기
+  $('userTag').style.display = 'none';
+  $('userTagFortune').style.display = 'none';
+  $('selectGreeting').innerHTML = '당신의 미래 직장운<br/>지금 확인해볼까요? ✨';
+  // 슬롯 원복
+  $('slotInner').innerHTML = `
+    <div class="slot-symbol">🥇</div>
+    <div class="slot-symbol">🥈</div>
+    <div class="slot-symbol">🥉</div>
+    <div class="slot-symbol">🎁</div>
+    <div class="slot-symbol">🥇</div>`;
+  $('spinBtn').disabled = false;
+  show('screen-input');
+  $('inputName').focus();
+});
+</script>
+</body>
+</html>
