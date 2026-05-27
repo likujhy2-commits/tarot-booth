@@ -844,67 +844,6 @@
     color: #fff5d9;
   }
 
-  /* ============ 설정 ============ */
-  .settings { position: fixed; top: 14px; right: 14px; z-index: 50; }
-  .settings-btn {
-    background: rgba(0,0,0,0.3);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50%;
-    width: 38px; height: 38px;
-    font-size: 16px;
-    padding: 0;
-  }
-  .settings-panel {
-    position: absolute;
-    top: 46px; right: 0;
-    background: rgba(30, 10, 60, 0.96);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 14px;
-    padding: 16px;
-    width: 340px;
-    display: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    text-align: left;
-  }
-  .settings-panel.show { display: block; }
-  .settings-panel label {
-    display: block;
-    font-size: 12px;
-    color: var(--accent);
-    margin-bottom: 6px;
-    margin-top: 8px;
-  }
-  .settings-panel input {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(0,0,0,0.3);
-    color: #fff;
-    font-size: 13px;
-  }
-  .settings-panel .row {
-    display: flex; gap: 6px;
-  }
-  .settings-panel .row input { width: 60px; text-align: center; }
-  .settings-panel .row label { flex: 1; margin: 0; line-height: 30px; font-size: 12px; color: #fff;}
-  .settings-panel .hint {
-    font-size: 11px;
-    color: #c8b3e8;
-    line-height: 1.5;
-    margin: 8px 0;
-  }
-  .settings-panel button {
-    width: 100%;
-    padding: 8px;
-    font-size: 13px;
-    margin-top: 8px;
-  }
-  .status { font-size: 11px; margin-top: 6px; color: #8c5fb0; }
-  .status.ok { color: #6ee7b7; }
-  .status.err { color: #ffb6b6; }
-
   .footer-note {
     margin-top: 24px;
     font-size: 12px;
@@ -917,30 +856,6 @@
 <div class="stars"></div>
 <div class="stars2"></div>
 
-<!-- 설정 -->
-<div class="settings">
-  <button class="settings-btn" id="settingsBtn" title="설정">⚙️</button>
-  <div class="settings-panel" id="settingsPanel">
-    <label>Anthropic API Key</label>
-    <input type="password" id="apiKeyInput" placeholder="sk-ant-..." />
-    <div class="status" id="keyStatus"></div>
-
-    <label style="margin-top:14px;">🎁 상품명 설정</label>
-    <input type="text" id="prize1" placeholder="1등 상품" />
-    <input type="text" id="prize2" placeholder="2등 상품" style="margin-top:5px;" />
-    <input type="text" id="prize3" placeholder="3등 상품" style="margin-top:5px;" />
-
-    <label style="margin-top:14px;">🎯 당첨 확률 (%)</label>
-    <div class="row">
-      <label>1등</label><input type="number" id="prob1" min="0" max="100" />
-      <label>2등</label><input type="number" id="prob2" min="0" max="100" />
-      <label>3등</label><input type="number" id="prob3" min="0" max="100" />
-    </div>
-    <div class="hint">합계 100% 미만이면 나머지는 "꽝(참가상)"이 돼요.</div>
-
-    <button class="btn-primary" id="saveBtn">저장</button>
-  </div>
-</div>
 
 <div class="container">
 
@@ -1412,13 +1327,12 @@ const DEFAULTS = {
   prob3: 85,
 };
 const state = {
-  apiKey: localStorage.getItem('anthropic_api_key') || '',
-  prize1: localStorage.getItem('prize1') || DEFAULTS.prize1,
-  prize2: localStorage.getItem('prize2') || DEFAULTS.prize2,
-  prize3: localStorage.getItem('prize3') || DEFAULTS.prize3,
-  prob1: parseInt(localStorage.getItem('prob1') ?? DEFAULTS.prob1, 10),
-  prob2: parseInt(localStorage.getItem('prob2') ?? DEFAULTS.prob2, 10),
-  prob3: parseInt(localStorage.getItem('prob3') ?? DEFAULTS.prob3, 10),
+  prize1: DEFAULTS.prize1,
+  prize2: DEFAULTS.prize2,
+  prize3: DEFAULTS.prize3,
+  prob1: DEFAULTS.prob1,
+  prob2: DEFAULTS.prob2,
+  prob3: DEFAULTS.prob3,
   selectedYear: null,
   fortune: null,
   prize: null,
@@ -1426,74 +1340,13 @@ const state = {
 };
 
 /* ============ 화면 전환 ============ */
+const $ = id => document.getElementById(id);
+
 function show(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(screenId).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-/* ============ 설정 패널 ============ */
-const $ = id => document.getElementById(id);
-const settingsBtn = $('settingsBtn');
-const settingsPanel = $('settingsPanel');
-
-function loadSettingsUI() {
-  $('apiKeyInput').value = state.apiKey;
-  $('prize1').value = state.prize1;
-  $('prize2').value = state.prize2;
-  $('prize3').value = state.prize3;
-  $('prob1').value = state.prob1;
-  $('prob2').value = state.prob2;
-  $('prob3').value = state.prob3;
-  refreshPrizeLabels();
-  updateKeyStatus();
-}
-
-function refreshPrizeLabels() {
-  ['p1-label','p1-label-2'].forEach(id => { const el = $(id); if (el) el.textContent = state.prize1; });
-  ['p2-label','p2-label-2'].forEach(id => { const el = $(id); if (el) el.textContent = state.prize2; });
-  ['p3-label','p3-label-2'].forEach(id => { const el = $(id); if (el) el.textContent = state.prize3; });
-}
-
-settingsBtn.addEventListener('click', () => settingsPanel.classList.toggle('show'));
-
-$('saveBtn').addEventListener('click', () => {
-  state.apiKey = $('apiKeyInput').value.trim();
-  state.prize1 = $('prize1').value.trim() || DEFAULTS.prize1;
-  state.prize2 = $('prize2').value.trim() || DEFAULTS.prize2;
-  state.prize3 = $('prize3').value.trim() || DEFAULTS.prize3;
-  state.prob1 = clamp(parseInt($('prob1').value, 10), 0, 100);
-  state.prob2 = clamp(parseInt($('prob2').value, 10), 0, 100);
-  state.prob3 = clamp(parseInt($('prob3').value, 10), 0, 100);
-  localStorage.setItem('anthropic_api_key', state.apiKey);
-  localStorage.setItem('prize1', state.prize1);
-  localStorage.setItem('prize2', state.prize2);
-  localStorage.setItem('prize3', state.prize3);
-  localStorage.setItem('prob1', state.prob1);
-  localStorage.setItem('prob2', state.prob2);
-  localStorage.setItem('prob3', state.prob3);
-  refreshPrizeLabels();
-  updateKeyStatus();
-  settingsPanel.classList.remove('show');
-});
-
-function clamp(n, min, max) {
-  if (isNaN(n)) return min;
-  return Math.max(min, Math.min(max, n));
-}
-
-function updateKeyStatus() {
-  const el = $('keyStatus');
-  if (state.apiKey && state.apiKey.startsWith('sk-ant-')) {
-    el.textContent = '✅ AI 운세 모드 (실시간 생성)'; el.className = 'status ok';
-  } else if (state.apiKey) {
-    el.textContent = '⚠️ 키 형식이 이상해요. sk-ant- 로 시작'; el.className = 'status err';
-  } else {
-    el.textContent = '💡 키 없음 → 기본 운세 모드'; el.className = 'status';
-  }
-}
-
-loadSettingsUI();
 
 /* ============ STEP 0: 이름 + 생년월일 + 성별 입력 ============ */
 let selectedGender = '';
@@ -1695,83 +1548,10 @@ $('readingToggle').addEventListener('click', () => {
   $('fortuneBox').classList.toggle('expanded');
 });
 
+// 운세 생성 — 22장 메이저 아르카나 풀에서 사용자 시드로 결정론적 뽑기
 async function generateFortune(year) {
-  if (!state.apiKey || !state.apiKey.startsWith('sk-ant-')) {
-    await new Promise(r => setTimeout(r, 800 + Math.random()*500));
-    return fallbackFortune(year);
-  }
-  try {
-    const u = state.user;
-    const genderLabel = u.gender === 'female' ? '여성' : '남성';
-    const genderTone = u.gender === 'female'
-      ? '여성 청년이 공감할 만한 톤 (다정, 섬세)'
-      : '남성 청년이 공감할 만한 톤 (간결, 단단함)';
-    const userBlock = u.name ? `
-참가자 정보 (반드시 운세에 자연스럽게 반영):
-- 이름: ${u.name}
-- 생년월일: ${u.year}년 ${u.month}월 ${u.day}일
-- 성별: ${genderLabel}
-- 별자리: ${u.zodiac.name} (${u.zodiac.traits})
-- 운명수: ${u.lifePath.number} — ${u.lifePath.name} (${u.lifePath.traits})
-
-위 정보를 바탕으로 ${u.name}님에게만 어울리는 맞춤 운세를 봐주세요.
-- 별자리의 성향과 운명수의 길을 ${year}년 후의 직장 운세에 자연스럽게 녹여서, "당신은 ○○자리답게..." 또는 "운명수 ${u.lifePath.number}의 길을 걷는 당신은..." 같은 표현을 본문이나 조언에 한 번씩 포함
-- 어조는 ${genderTone}` : '';
-
-    const prompt = `당신은 따뜻하고 위트있는 타로 마스터예요. 광주청년 "일경험드림" 사업 홍보 부스에서 청년 참가자에게 "${year}년 후 직장운"을 봐주는 상황이에요.
-${userBlock}
-
-다음 JSON 형식으로만 답해주세요 (다른 텍스트 절대 X):
-{
-  "icon": "이모지 1개 (카드 중앙에 들어갈 상징적인 이모지)",
-  "title": "카드 이름 (한글 카드명 + ' · ' + 영문 부제, 예: '첫 발의 빛 · The Spark')",
-  "body": "운세 본문 (3~4문장, 180~260자, 줄바꿈 \\n, 다정한 존댓말, 마지막에 이모지 1개)",
-  "advice": "타로 마스터의 실용 조언 (1~2문장, 70~110자, 지금 당장 실천할 수 있는 구체적 행동 1가지 + 짧은 이유)",
-  "keywords": ["행운 키워드1", "행운 키워드2", "행운 키워드3"]
-}
-
-작성 규칙:
-- ${year}년 후의 직장/커리어/일 운세에 집중
-- body 첫 문장: 구체적인 장면 묘사 (첫 출근, 회의, 카톡 알림 등 영화의 한 컷처럼)
-- body 중간: 그 장면에서의 변화나 만남
-- body 마지막: 격언처럼 짧은 통찰
-- advice: 진부함 금지. "노력하세요/포기하지 마세요" 같은 추상적 말 X. "이번 달 안에 X명에게 연락해보세요" 처럼 구체적
-- keywords: 2~5자 짧은 단어, 명사 위주 (예: "용기", "메모", "첫인상")
-- 진부한 표현 금지 (꿈을 향해 / 노력하면 / 화이팅 등 X)
-- 청년이 듣고 설레고 위로받을 만한 톤, 살짝 시적이게
-- 줄바꿈은 반드시 \\n 으로 (실제 줄바꿈 X, JSON 파싱 가능해야 함)`;
-
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': state.apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5',
-        max_tokens: 800,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    if (!res.ok) { console.warn('API', res.status); return fallbackFortune(year); }
-    const data = await res.json();
-    const text = data?.content?.[0]?.text?.trim() || '';
-    const m = text.match(/\{[\s\S]*\}/);
-    if (!m) return fallbackFortune(year);
-    const p = JSON.parse(m[0]);
-    return {
-      icon: p.icon || pickIcon(),
-      title: p.title || '미래의 한 장면',
-      body: p.body || '',
-      advice: p.advice || '',
-      keywords: Array.isArray(p.keywords) ? p.keywords.slice(0, 4) : []
-    };
-  } catch (e) {
-    console.warn(e);
-    return fallbackFortune(year);
-  }
+  await new Promise(r => setTimeout(r, 800 + Math.random() * 500)); // 분위기 연출용 딜레이
+  return fallbackFortune(year);
 }
 
 /* ============ STEP 2: 상품 추첨 ============ */
